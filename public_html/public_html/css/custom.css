@@ -1,0 +1,154 @@
+ /* Custom Styles for 3D coca-cola */
+
+ .navbar {
+    background-color: rgb(0, 0, 0) !important;
+}
+
+.navbar .nav-link {
+    color: rgb(248, 245, 245) !important;
+}
+
+.navbar .nav-link.active {
+    font-weight: bold;
+    color: rgb(255, 255, 255) !important;
+}
+
+/* Hero Section */
+.hero-section {
+    padding-top: 50px; /* Adjust this value based on your navbar height */
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('coc.gif');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-top: 50px; /* Account for fixed navbar */
+}
+
+.hero-section h1 {
+    padding-top: 0px;
+    font-size: 4rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(188, 8, 8, 0.5);
+}
+
+/* Logo Styling */
+.logo h1 {
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-family: 'Arial', sans-serif;
+    margin-bottom: 0;
+}
+
+.logo .tagline {
+    font-style: italic;
+    color: #cccccc;
+    font-size: 0.9rem;
+}
+
+/* 3D Model Container */
+#modelContainer {
+    width: 100%;
+    height: 600px;
+    background-color: #f8f9fa;
+    border-radius: 0 0 5px 5px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Gallery Model Containers */
+.model-container {
+    width: 100%;
+    height: 300px;
+    background-color: #f8f9fa;
+    border-radius: 0 0 5px 5px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Card Styling */
+.card {
+   /* background-color: darkred;*/
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    border: none;
+}
+
+.card-header {
+    border-bottom: none;
+    font-weight: bold;
+}
+
+/* Button Styling */
+.btn-outline-primary:hover, 
+.btn-outline-info:hover, 
+.btn-outline-success:hover, 
+.btn-outline-danger:hover {
+    color: white;
+}
+
+/* Footer Styling */
+footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+footer a {
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    #modelContainer {
+        height: 400px;
+    }
+    
+    .model-container {
+        height: 250px;
+    }
+    
+    .navbar-nav {
+        padding-top: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    #modelContainer {
+        height: 300px;
+    }
+    
+    .model-container {
+        height: 200px;
+    }
+    
+    .logo h1 {
+        font-size: 1.5rem;
+    }
+    
+    .logo .tagline {
+        font-size: 0.8rem;
+    }
+}
+
+/* Animation for model loading */
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.loading-spinner {
+    animation: rotate 1.5s linear infinite;
+}
+
+/* Product info transitions */
+#productInfo > div,
+#productDescription > div {
+    transition: all 0.3s ease-in-out;
+}

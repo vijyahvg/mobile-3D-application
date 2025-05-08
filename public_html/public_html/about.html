@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - 3D Beverage Showcase</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="container-fluid bg-black text-black p-3">
+        <div class="row align-items-center">
+            <div class="col-md-4">
+                <div class="logo">
+                    <div class="container">
+                        <a class="navbar-brand" href="#">
+                          <img src="cocacola1.jpg" alt="Coca Cola Logo" height="100">
+                      </a>
+                      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                          <span class="navbar-toggler-icon"></span>
+                      </button>
+                        </div>
+                      </div>
+                  </div>
+            <div class="col-md-8">
+                <nav class="navbar navbar-expand-lg navbar-dark">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.html">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="gallery.html">Model Gallery</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="about.html">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="statement.html">Statement of Originality</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header bg-danger text-white">
+                        <h2>About This Project</h2>
+                    </div>
+                    <div class="card-body">
+                        <h3>Project Overview</h3>
+                        <p>
+                            The "Refreshment 3D" application was developed as part of the Mobile 3D App Assignment. 
+                            This interactive web application showcases three beverage container models: a cola can, 
+                            a plastic bottle, and a glass bottle. Users can interact with these 3D models, view them 
+                            in wireframe mode, control lighting, and learn about each product.
+                        </p>
+
+                        <hr>
+
+                        <h3>Technologies Used</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>Frontend Technologies</h4>
+                                <ul>
+                                    <li><strong>HTML5:</strong> For structuring the web pages</li>
+                                    <li><strong>CSS3:</strong> For styling and responsive design</li>
+                                    <li><strong>Bootstrap 5:</strong> For responsive layout and components</li>
+                                    <li><strong>JavaScript:</strong> For interaction and functionality</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h4>3D Technologies</h4>
+                                <ul>
+                                    <li><strong>Three.js:</strong> JavaScript 3D library for rendering the models</li>
+                                    <li><strong>Blender:</strong> For creating and editing the 3D models</li>
+                                    <li><strong>glTF/GLB:</strong> For optimized 3D model delivery</li>
+                                    <li><strong>OrbitControls:</strong> For camera movement and interaction</li>
+                                    <li><strong>Animation Mixer:</strong> For handling model animations</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <h3>3D Models</h3>
+                        <p>
+                            All 3D models were created using Blender. Special attention was paid to geometry, 
+                            materials, and textures to create realistic beverage containers:
+                        </p>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-header bg-danger text-white">Cola Can</div>
+                                    <div class="card-body">
+                                        <p>The cola can model was created using cylinder primitives with edge loops 
+                                        for the top and bottom details. Custom textures were applied to create 
+                                        the label and metallic surface.</p>
+                                        <p><strong>Polygon count:</strong> Approximately 2,400 triangles</p>
+                                        <p><strong>Animation states:</strong> Default, open (ring pull), and crush simulation</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-header bg-danger text-white">Plastic Bottle</div>
+                                    <div class="card-body">
+                                        <p>The plastic bottle was modeled using a combination of revolve operations 
+                                        and subdivision surface modifiers. The cap was modeled separately and includes 
+                                        threading details.</p>
+                                        <p><strong>Polygon count:</strong> Approximately 8,600 triangles</p>
+                                        <p><strong>Animation states:</strong> Default, open cap, empty, and crush simulation</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-header bg-danger text-white">Glass Bottle</div>
+                                    <div class="card-body">
+                                        <p>The glass bottle features a complex curved shape created using spline-based 
+                                        modeling. Glass materials use PBR (Physically Based Rendering) for realistic 
+                                        refraction and reflection.</p>
+                                        <p><strong>Polygon count:</strong> Approximately 12,800 triangles</p>
+                                        <p><strong>Animation states:</strong> Default, open cap, empty, and crush simulation</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <h3>Interactive Features</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>Model Interaction</h4>
+                                <ul>
+                                    <li>Orbit controls for 3D navigation</li>
+                                    <li>Toggle wireframe mode</li>
+                                    <li>Toggle automatic rotation</li>
+                                    <li>Adjust lighting conditions</li>
+                                    <li>Switch between different models</li>
+                                    <li>Play sound effects for model interactions</li>
+                                    <li>Camera positioning controls (top, bottom, left, right, front, back)</li>
+                                    <li>Screenshot functionality</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h4>User Interface</h4>
+                                <ul>
+                                    <li>Responsive design for mobile and desktop</li>
+                                    <li>Model selection panel</li>
+                                    <li>Interactive control buttons</li>
+                                    <li>Product information display</li>
+                                    <li>Multi-model gallery view</li>
+                                    <li>Adjustable model scale and rotation speed</li>
+                                    <li>Advanced control panel with interactive sliders</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <h3>Audio Implementation</h3>
+                        <p>
+                            The application features realistic sound effects for various interactions:
+                        </p>
+                        <ul>
+                            <li><strong>Opening sounds:</strong> Unique audio cues for opening cans, plastic bottles, and glass bottles</li>
+                            <li><strong>Crushing sounds:</strong> Distinct sounds for each material when crushed</li>
+                            <li><strong>Volume control:</strong> User-adjustable audio levels</li>
+                            <li><strong>Mute functionality:</strong> Option to completely disable sound</li>
+                        </ul>
+
+                        <hr>
+
+                        <h3>Development Process</h3>
+                        <p>
+                            The development of this project followed these key steps:
+                        </p>
+                        <ol>
+                            <li><strong>Planning:</strong> Defining requirements and sketching the UI/UX design</li>
+                            <li><strong>3D Modeling:</strong> Creating detailed models in Blender with appropriate textures</li>
+                            <li><strong>Animation:</strong> Rigging and animating the models for different states</li>
+                            <li><strong>Audio:</strong> Recording and editing sound effects for various interactions</li>
+                            <li><strong>Web Development:</strong> Building responsive HTML/CSS layouts with Bootstrap</li>
+                            <li><strong>3D Integration:</strong> Implementing Three.js for model rendering and interaction</li>
+                            <li><strong>Testing:</strong> Cross-browser testing and mobile responsiveness</li>
+                            <li><strong>Optimization:</strong> Refining model complexity and texture sizes for web delivery</li>
+                            <li><strong>User Testing:</strong> Gathering feedback and making improvements</li>
+                        </ol>
+
+                        <hr>
+
+                        <h3>Challenges and Solutions</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>Challenges</h4>
+                                <ul>
+                                    <li>Creating realistic materials for glass and liquid</li>
+                                    <li>Optimizing models for web performance</li>
+                                    <li>Implementing responsive design for 3D content</li>
+                                    <li>Managing lighting to showcase model details</li>
+                                    <li>Synchronizing animations with sound effects</li>
+                                    <li>Creating realistic crush animations</li>
+                                    <li>Supporting wireframe mode with animations</li>
+                                    <li>Managing memory for multiple 3D models in gallery view</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h4>Solutions</h4>
+                                <ul>
+                                    <li>Used PBR materials with optimized texture sizes</li>
+                                    <li>Reduced polygon count while preserving visual quality</li>
+                                    <li>Implemented responsive container sizing for all devices</li>
+                                    <li>Added interactive lighting controls</li>
+                                    <li>Created custom event listeners for animation/sound synchronization</li>
+                                    <li>Used shape keys in Blender for realistic deformations</li>
+                                    <li>Developed custom wireframe handling with THREE.WireframeGeometry</li>
+                                    <li>Implemented efficient scene management and disposal</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <h3>Performance Optimization</h3>
+                        <p>
+                            Several techniques were employed to optimize the application's performance:
+                        </p>
+                        <ul>
+                            <li><strong>Model simplification:</strong> Reduced polygon count while maintaining visual fidelity</li>
+                            <li><strong>Texture compression:</strong> Optimized image sizes and formats</li>
+                            <li><strong>Lazy loading:</strong> Models are only loaded when selected</li>
+                            <li><strong>Efficient animation:</strong> Using THREE.AnimationMixer for optimized playback</li>
+                            <li><strong>Memory management:</strong> Proper cleanup of unused 3D objects</li>
+                            <li><strong>Responsive rendering:</strong> Adjusting render quality based on device capabilities</li>
+                        </ul>
+
+                        <hr>
+
+                        <h3>User Testing Insights</h3>
+                        <p>
+                            The application was tested with several users to gather feedback and make improvements:
+                        </p>
+                        <ul>
+                            <li>Users appreciated the realistic model details and animations</li>
+                            <li>Mobile controls were initially challenging for some users, leading to interface improvements</li>
+                            <li>Sound effects were consistently rated as adding value to the experience</li>
+                            <li>The gallery view was preferred for comparing different container types</li>
+                            <li>Users suggested additional features like AR viewing capabilities</li>
+                        </ul>
+
+                        <hr>
+
+                        <h3>Learning Outcomes</h3>
+                        <p>
+                            Key skills and knowledge gained from this project:
+                        </p>
+                        <ul>
+                            <li>Advanced Three.js implementation for interactive 3D web applications</li>
+                            <li>Optimization techniques for web-based 3D content</li>
+                            <li>Integration of sound with 3D animations</li>
+                            <li>Responsive design principles for 3D interfaces</li>
+                            <li>User experience considerations for 3D interactions</li>
+                            <li>Cross-browser compatibility for WebGL content</li>
+                        </ul>
+
+                        <hr>
+
+                        <h3>Future Improvements</h3>
+                        <p>
+                            Future versions of this application could include:
+                        </p>
+                        <ul>
+                            <li>Animation sequences for opening/pouring</li>
+                            <li>Physics-based interactions</li>
+                            <li>AR (Augmented Reality) viewing option</li>
+                            <li>Additional product variants and customization options</li>
+                            <li>Social sharing capabilities</li>
+                            <li>Interactive liquid simulations</li>
+                            <li>Environmental impact visualization</li>
+                            <li>VR (Virtual Reality) support</li>
+                        </ul>
+
+                        <hr>
+
+                        <h3>Conclusion</h3>
+                        <p>
+                            The 3D Beverage Showcase represents a successful integration of 3D modeling, 
+                            web technologies, and interactive design. By creating a responsive, feature-rich 
+                            application that allows users to explore and interact with beverage containers in 
+                            three dimensions, the project demonstrates how 3D content can enhance product 
+                            visualization and user engagement.
+                        </p>
+                        <p>
+                            The challenges overcome during development—from creating realistic materials to 
+                            optimizing performance across devices—provided valuable learning experiences in 
+                            both technical and design aspects of 3D web applications. The integration of sound 
+                            effects with animations adds another sensory dimension to the user experience, 
+                            making interactions more engaging and intuitive.
+                        </p>
+                        <p>
+                            This project serves as both an educational tool for understanding beverage container 
+                            design and a demonstration of what's possible when combining modern web technologies 
+                            with 3D content. The responsive design ensures accessibility across a wide range of 
+                            devices, making this application a versatile showcase for 3D web development.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="container-fluid bg-black text-white mt-5 p-4">
+        <div class="row">
+            <div class="col-md-6">
+                <h4>3D CocaCola</h4>
+                <p>A 3D interactive showcase of beverage containers</p>
+                <p>&copy; 2025 Mobile 3D App Assignment</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <a href="about.html" class="text-white me-3">About</a>
+                <a href="statement.html" class="text-white me-3">Statement of Originality</a>
+                <a href="https://github.com/yourusername/mobile-3d-app" target="_blank" class="text-white">GitHub Repository</a>
+            </div>
+        </div>
+    </footer>

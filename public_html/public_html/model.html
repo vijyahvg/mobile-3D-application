@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Coca-Cola Model Viewer</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Basic Three.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.137.0/build/three.min.js"></script>
+    <!-- Load OrbitControls and GLTFLoader directly from the CDN as separate files -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.137.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.137.0/examples/js/loaders/GLTFLoader.js"></script>
+    <!-- Your custom JavaScript - add this AFTER the Three.js scripts -->
+    <script src="js/modelController.js"></script>
+    <style>
+        /* Custom styles for active buttons */
+        .btn-toggle.active {
+            background-color: #e40000 !important;
+            color: white !important;
+        }
+        
+        /* Custom spinner */
+        .action-spinner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.7);
+            z-index: 100;
+        }
+
+        /* Fullscreen model container */
+        .fullscreen-model {
+            height: 80vh;
+            position: relative;
+        }
+
+        /* Brand image */
+        .brand-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            max-width: 180px;
+            z-index: 10;
+            opacity: 0.85;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="container-fluid bg-black text-black p-3">
+        <div class="row align-items-center">
+            <div class="col-md-4">
+                <div class="logo">
+                  <div class="container">
+                  <a class="navbar-brand" href="index.html">
+                    <img src="coca2.jpg" alt="Coca Cola Logo" height="80">
+                  </a>
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <nav class="navbar navbar-expand-lg navbar-black">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.html">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="gallery.html">Model Gallery</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="about.html">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="statement.html">Statement of Originality</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container-fluid p-0">
+        <div class="row g-0">
+            <!-- 3D Model Selection Panel -->
+            <div class="col-md-3 p-3 bg-black text-white">
+                <div class="sticky-top pt-3">
+                    <h2 class="mb-4">Coca-Cola 3D Models</h2>
+                    
+                    <div class="card mb-4">
+                        <div class="card-header bg-danger text-white">
+                            <h3>Model Selection</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="list-group" id="modelSelectionButtons">
+                                <button class="btn list-group-item-action btn-outline-danger bg-black" onclick="loadModel('soda_can')">Cola Can</button>
+                                <button class="btn list-group-item-action btn-outline-danger bg-black" onclick="loadModel('complete_bottle')">Plastic Bottle</button>
+                                <button class="btn list-group-item-action btn-outline-danger bg-black" onclick="loadModel('glassbottle')">Glass Bottle</button>
+                            </div>
+                            
+                            <hr>
+                            
+                            <h4>Model Controls</h4>
+                            <div class="d-grid gap-2 mt-3">
+                                <button class="btn btn-outline-danger btn-toggle" id="toggleWireframe">Toggle Wireframe</button>
+                                <button class="btn btn-outline-danger btn-toggle" id="toggleRotation">Toggle Rotation</button>
+                                <button class="btn btn-outline-danger btn-toggle" id="toggleLights">Toggle Lights</button>
+                            </div>
+                            
+                            <h4 class="mt-3">Action Controls</h4>
+                            <div class="d-grid gap-2">
+                                <div id="cola_can_animations">
+                                    <button class="btn btn-outline-danger mb-1" onclick="loadModel('soda_can')">Default Can</button>
+                                    <button class="btn btn-outline-danger mb-1" onclick="loadModel('soda_can_ringpull')">Open Can</button>
+                                    <button class="btn btn-outline-danger mb-1" onclick="loadModel('cancrush_video')">Crush Can</button>
+                                </div>
+                                
+                                <div id="plastic_bottle_animations" style="display: none;">
+                                    <button class="btn btn-outline-info mb-1" onclick="loadModel('complete_bottle')">Default Bottle</button>
+                                    <button class="btn btn-outline-info mb-1" onclick="loadModel('bottleA_cap')">Open Bottle</button>
+                                    <button class="btn btn-outline-info mb-1" onclick="loadModel('empty_bottle')">Empty Bottle</button>
+                                    <button class="btn btn-outline-info mb-1" onclick="loadBottleCrush()">Crush Bottle</button>
+                                </div>
+                                
+                                <div id="glass_bottle_animations" style="display: none;">
+                                    <button class="btn btn-outline-success mb-1" onclick="loadModel('glassbottle')">Default Bottle</button>
+                                    <button class="btn btn-outline-success mb-1" onclick="loadModel('glasscap_open')">Open Bottle</button>
+                                    <button class="btn btn-outline-success mb-1" onclick="loadModel('empty_glassbottle')">Empty Bottle</button>
+                                    <button class="btn btn-outline-success mb-1" onclick="loadModel('glassbottle_crush')">Crush Bottle</button>
+                                </div>
+                            </div>
+                            
+                            <hr>
+                            
+                            <h4>Camera Controls</h4>
+                            <p class="small text-muted">
+                                <strong>Rotate:</strong> Left-click + drag<br>
+                                <strong>Pan:</strong> Right-click + drag<br>
+                                <strong>Zoom:</strong> Scroll wheel
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header bg-danger text-white">
+                            <h3>Product Info</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="productInfo">
+                                <div id="cola_can_info">
+                                    <h4>Cola Can</h4>
+                                    <p>Our classic Cola can, featuring the iconic design known worldwide.</p>
+                                    <ul>
+                                        <li>Volume: 330ml</li>
+                                        <li>Material: Aluminum</li>
+                                        <li>Recyclable: Yes</li>
+                                    </ul>
+                                </div>
+                                
+                                <div id="plastic_bottle_info" style="display: none;">
+                                    <h4>Plastic Bottle</h4>
+                                    <p>Convenient and portable plastic bottle, perfect for on-the-go refreshment.</p>
+                                    <ul>
+                                        <li>Volume: 500ml</li>
+                                        <li>Material: PET</li>
+                                        <li>Recyclable: Yes</li>
+                                    </ul>
+                                </div>
+                                
+                                <div id="glass_bottle_info" style="display: none;">
+                                    <h4>Glass Bottle</h4>
+                                    <p>Our premium glass bottle, delivering a classic and refreshing experience.</p>
+                                    <ul>
+                                        <li>Volume: 250ml</li>
+                                        <li>Material: Glass</li>
+                                        <li>Recyclable: Yes</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <a href="index.html" class="btn btn-danger w-100 mt-3">Back to Home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 3D Model Display Area - FULLSCREEN VERSION -->
+            <div class="col-md-9 p-0">
+                <div class="card h-100 border-0 rounded-0">
+                    <div class="card-header bg-dark text-white">
+                        <h3 id="modelTitle">Cola Can</h3>
+                    </div>
+                    <div class="card-body p-0">
+                        <div id="modelContainer" class="fullscreen-model">
+                            <!-- Coca-Cola brand watermark -->
+                            <img src="cocacola1.jpg" alt="Coca-Cola" class="brand-overlay">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Add this somewhere in your HTML, but keep it hidden initially -->
+<div id="productDescription" style="display: none;">
+    <div id="cola_can_desc">
+        <h4>Cola Can Description</h4>
+        <p>The classic aluminum can with the iconic Coca-Cola design.</p>
+    </div>
+    <div id="plastic_bottle_desc" style="display: none;">
+        <h4>Plastic Bottle Description</h4>
+        <p>The convenient PET bottle perfect for on-the-go refreshment.</p>
+    </div>
+    <div id="glass_bottle_desc" style="display: none;">
+        <h4>Glass Bottle Description</h4>
+        <p>The premium glass bottle delivering an authentic taste experience.</p>
+    </div>
+</div>
+
+    <!-- Footer -->
+    <footer class="container-fluid bg-black text-white p-4">
+        <div class="row">
+            <div class="col-md-6">
+                <h4>3D CocaCola</h4>
+                <p>A 3D interactive showcase of beverage containers</p>
+                <p>&copy; 2025 Mobile 3D App Assignment</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <a href="about.html" class="text-white me-3">About</a>
+                <a href="statement.html" class="text-white me-3">Statement of Originality</a>
+                <a href="https://github.com/yourusername/mobile-3d-app" target="_blank" class="text-white">GitHub Repository</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

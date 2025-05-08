@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Gallery - 3D Beverage Showcase</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Make sure to use the same version of Three.js as in index.html -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.137.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.137.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.137.0/examples/js/loaders/GLTFLoader.js"></script>
+    <style>
+        .model-container {
+            height: 300px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Add loading spinner styles to match index.html */
+        .action-spinner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.7);
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="container-fluid bg-black text-black p-3">
+        <div class="row align-items-center">
+            <div class="col-md-4">
+                <div class="logo">
+                    <div class="container">
+                        <a class="navbar-brand" href="#">
+                          <img src="cocacola1.jpg" alt="Coca Cola Logo" height="100">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <nav class="navbar navbar-expand-lg navbar-white">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.html">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="gallery.html">Model Gallery</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="about.html">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="statement.html">Statement of Originality</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mt-4">
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div class="card">
+                    <div class="card-header bg-danger text-white">
+                        <h2>3D Model Gallery</h2>
+                        <p class="mb-0">View and compare all beverage containers</p>
+                    </div>
+                    <div class="card-body bg-black">
+                        <p>This gallery showcases all three beverage container models side by side. You can interact with each model independently.</p>
+                        
+                        <div class="d-flex justify-content-center mb-3">
+                            <div class="btn-group">
+                                <button class="btn btn-outline-danger" id="toggleAllWireframe">Toggle All Wireframe</button>
+                                <button class="btn btn-outline-danger" id="toggleAllRotation">Toggle All Rotation</button>
+                                <button class="btn btn-outline-danger" id="toggleAllLights">Toggle All Lights</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <!-- Cola Can -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-header bg-black text-white">
+                        <h3>Cola Can</h3>
+                    </div>
+                    <div class="card-body p-0">
+                        <div id="canContainer" class="model-container"></div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-sm btn-outline-danger" onclick="toggleWireframe('can')">Toggle Wireframe</button>
+                            <button class="btn btn-sm btn-outline-danger" onclick="toggleRotation('can')">Toggle Rotation</button>
+                            <div class="dropdown mt-2">
+                                <button class="btn btn-sm btn-danger dropdown-toggle w-100" type="button" id="canAnimationDropdown" data-bs-toggle="dropdown">
+                                    Can States
+                                </button>
+                                <ul class="dropdown-menu w-100" aria-labelledby="canAnimationDropdown">
+                                    <li><button class="dropdown-item" onclick="loadModelForContainer('can', 'soda_can')">Default Can</button></li>
+                                    <li><button class="dropdown-item" onclick="loadModelForContainer('can', 'soda_can_ringpull')">Open Can</button></li>
+                                    <li><button class="dropdown-item" onclick="loadModelForContainer('can', 'cancrush_video')">Crush Can</button></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Plastic Bottle -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-header bg-black text-white">
+                        <h3>Plastic Bottle</h3>
+                    </div>
+                    <div class="card-body p-0">
+                        <div id="plasticContainer" class="model-container"></div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-sm btn-outline-danger" onclick="toggleWireframe('plastic')">Toggle Wireframe</button>
+                            <button class="btn btn-sm btn-outline-danger" onclick="toggleRotation('plastic')">Toggle Rotation</button>
+                            <div class="dropdown mt-2">
+                                <button class="btn btn-sm btn-danger dropdown-toggle w-100" type="button" id="plasticAnimationDropdown" data-bs-toggle="dropdown">
+                                    Bottle States
+                                </button>
+                                <ul class="dropdown-menu w-100" aria-labelledby="plasticAnimationDropdown">
+                                    <li><button class="dropdown-item" onclick="loadModelForContainer('plastic', 'complete_bottle')">Default Bottle</button></li>
+                                    <li><button class="dropdown-item" onclick="loadModelForContainer('plastic', 'bottleA_cap')">Open Bottle</button></li>
+                                    <li><button class="dropdown-item" onclick="loadModelForContainer('plastic', 'empty_bottle')">Empty Bottle</button></li>
+                                    <li><button class="dropdown-item" onclick="loadBottleCrush('plastic')">Crush Bottle</button></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Glass Bottle -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-header bg-black text-white">
+                        <h3>Glass Bottle</h3>
+                    </div>
+                    <div class="card-body p-0">
+                        <div id="glassContainer" class="model-container"></div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-sm btn-outline-danger" onclick="toggleWireframe('glass')">Toggle Wireframe</button>
+                            <button class="btn btn-sm btn-outline-danger" onclick="toggleRotation('glass')">Toggle Rotation</button>
+                            <div class="dropdown mt-2">
+                                <button class="btn btn-sm btn-danger dropdown-toggle w-100" type="button" id="glassAnimationDropdown" data-bs-toggle="dropdown">
+                                    Bottle States
+                                </button>
+                                <ul class="dropdown-menu w-100" aria-labelledby="glassAnimationDropdown">
+                                    <li><button class="dropdown-item" onclick="loadModelForContainer('glass', 'glassbottle')">Default Bottle</button></li>
+                                    <li><button class="dropdown-item" onclick="loadModelForContainer('glass', 'glasscap_open')">Open Bottle</button></li>
+                                    <li><button class="dropdown-item" onclick="loadModelForContainer('glass', 'empty_glassbottle')">Empty Bottle</button></li>
+                                    <li><button class="dropdown-item" onclick="loadBottleCrush('glass')">Crush Bottle</button></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header bg-black text-white">
+                        <h3>Beverage Containers Comparison</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Feature</th>
+                                        <th>Cola Can</th>
+                                        <th>Plastic Bottle</th>
+                                        <th>Glass Bottle</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Volume</td>
+                                        <td>330ml</td>
+                                        <td>500ml</td>
+                                        <td>250ml</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Material</td>
+                                        <td>Aluminum</td>
+                                        <td>PET Plastic</td>
+                                        <td>Glass</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Shelf Life</td>
+                                        <td>6 months</td>
+                                        <td>3 months</td>
+                                        <td>12 months</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Recyclable</td>
+                                        <td>Yes</td>
+                                        <td>Yes</td>
+                                        <td>Yes</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Weight (empty)</td>
+                                        <td>15g</td>
+                                        <td>25g</td>
+                                        <td>200g</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Best For</td>
+                                        <td>Quick refreshment</td>
+                                        <td>On-the-go</td>
+                                        <td>Premium experience</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="container-fluid bg-black text-white mt-5 p-4">
+        <div class="row">
+            <div class="col-md-6">
+                <h4>3D CocaCola</h4>
+                <p>A 3D interactive showcase of beverage containers</p>
+                <p>&copy; 2025 Mobile 3D App Assignment</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <a href="about.html" class="text-white me-3">About</a>
+                <a href="statement.html" class="text-white me-3">Statement of Originality</a>
+                <a href="https://github.com/yourusername/mobile-3d-app" target="_blank" class="text-white">GitHub Repository</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JavaScript - make sure path is correct and increment version to force cache refresh -->
+    <script src="js/galleryController.js?v=7"></script>
+</body>
+</html>
